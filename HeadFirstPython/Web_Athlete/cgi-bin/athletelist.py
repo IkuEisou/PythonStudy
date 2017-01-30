@@ -11,3 +11,6 @@ class AthleteList(list):
 
     def prtTop3(self):
          print(self.name + '\'s fastest times are: ' + str(self[0:3]))
+         
+    def top3(self):
+        return(self[0:3])

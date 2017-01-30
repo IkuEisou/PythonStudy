@@ -1,4 +1,4 @@
-import pickle, os
+import pickle, glob
 from athletelist import AthleteList
 
 def get_coach_data(file):
@@ -29,16 +29,13 @@ def crt_athlete(data):
     return a
 
 def getAll():
-    os.chdir("data")
-    cwd = os.getcwd()
-    print(cwd)
+    data_files = glob.glob('data/*.txt')
+    #print(data_files)
     all_ath = {}
-    for each_f in os.listdir(cwd):
-        if each_f.endswith('.txt'):
-            print("Now loading "+each_f)
-            data = get_coach_data(each_f)
-            ath = crt_athlete(data)
-            all_ath[ath.name] = ath
+    for each_f in data_files:
+        data = get_coach_data(each_f)
+        ath = crt_athlete(data)
+        all_ath[ath.name] = ath
     return all_ath
             
 def put2store(fileName='athletes.pickle'):
@@ -52,13 +49,13 @@ def get_from_store(fileName='athletes.pickle'):
     try:
         with open(fileName, 'rb') as athf:
            all_athletes = pickle.load(athf)
-        for each_ath in all_athletes:
-            print(all_athletes[each_ath].name + ' '
-                  + all_athletes[each_ath].dob)
+##        for each_ath in all_athletes:
+##            print(all_athletes[each_ath].name + ' '
+##                  + all_athletes[each_ath].dob)
         return all_athletes
     except IOError as ioerr:
         print('File err(get_from_store):' + str(ioerr))
         return None
 
-#put2store()
-#get_from_store()
+##put2store()
+##get_from_store()
