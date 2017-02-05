@@ -57,5 +57,9 @@ def get_from_store(fileName='athletes.pickle'):
         print('File err(get_from_store):' + str(ioerr))
         return None
 
+def get_names_from_store():
+    athletes = get_from_store()
+    response = [athletes[each_ath].name for each_ath in athletes]
+    return(response)
 ##put2store()
 ##get_from_store()
